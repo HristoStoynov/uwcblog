@@ -1,4 +1,4 @@
-.timeline-heading {
+.timelineheading {
     color: #009b90;
     text-align: center;
 }
@@ -86,7 +86,7 @@
     }
 }
 
-.timeline__item--year {
+.timeline__itemyear {
     width: 3em;
     height: 3em;
     line-height: 3em;
@@ -99,102 +99,21 @@
     border-image: none;
 }
 
-strong {
-    font-size: 17px;
-    position: relative;
-    top: 15px;
-}
-
-.timeline__item--year:before {
+.timeline__itemyear:before {
     display: none;
 }
 
 @media screen and (min-width: 800px) {
-    .timeline__item--year {
+    .timeline__itemyear {
         text-align: center;
         margin: 0 auto;
     }
-    .timeline__item--year:nth-of-type(2n) {
+    .timeline__itemyear:nth-of-type(2n) {
         float: none;
         margin: 0 auto;
         border-image: none;
     }
-    .timeline__item--year:nth-of-type(2n):before {
+    .timeline__itemyear:nth-of-type(2n):before {
         display: none;
-    }
-}
-
-.timeline__title {
-    margin: 0;
-    text-align: center;
-    font-size: 1.5em;
-    color: rgb(255, 255, 255);
-    position: absolute;
-    width: 100%;
-    top: 16.5rem;
-}
-
-.timeline__date {
-    line-height: 1.5;
-    font-size: 1rem;
-    margin: 0.5rem 0 0;
-    color: #009b90;
-    text-align: center;
-    padding-top: 15rem;
-    width: 100%;
-    position: absolute;
-}
-
-.timeline-img {
-    height: calc(20rem - 4px);
-    width: calc(20rem - 4px);
-    position: absolute;
-}
-
-.img-blur {
-    height: calc(20rem - 4px);
-    width: calc(20rem - 4px);
-    position: absolute;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, rgba(0, 99, 166, 0) 30%, rgba(0, 0, 0, 1) 100%);
-}
-
-.img-blur:hover {
-    background: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, rgba(0, 0, 0, 1) 100%);
-}
-
-.timeline-link:hover>.img-blur {
-    background: linear-gradient(180deg, rgba(2, 0, 36, 0) 0%, rgba(0, 0, 0, 1) 100%);
-}
-
-.timeline-box {
-    height: 20rem;
-    width: 20rem;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(0, 99, 166, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    border-color: #0063a6;
-    border-image: linear-gradient(to right, #0063a6 0%, #0063a6 100%);
-    border-image-slice: 1;
-}
-
-@media screen and (max-width: 420px) {
-    .timeline-box {
-        height: 14rem;
-        width: 14rem;
-    }
-    .timeline-img {
-        height: calc(14rem - 4px);
-        width: calc(14rem - 4px);
-    }
-    .img-blur {
-        height: calc(14rem - 4px);
-        width: calc(14rem - 4px);
-    }
-    .timeline__date {
-        padding-top: 9rem;
-    }
-    .timeline__title {
-        font-size: 1em;
-        top: 11.5rem;
     }
 }

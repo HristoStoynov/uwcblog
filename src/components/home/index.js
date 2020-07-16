@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import styles from './index.module.css'
 import Post from '../post';
+import styles from './index.module.css'
 
 class Home extends Component {
     constructor(props) {
@@ -34,10 +34,13 @@ class Home extends Component {
     }
 
     render() {
+        const yearClasses = styles.timeline__item + " " + styles.timeline__itemyear
+
         return (
-            <div className={styles.container}>
-                <h1 className={styles.title}>Post</h1>
-                <div className={styles["origamis-wrapper"]}>
+            <div>
+                <h1 className={styles.timelineheading}>My UWC Timeline</h1>
+                <div className={styles.timeline}>
+                    <h2 className={yearClasses}>2020</h2>
                     {this.renderPosts()}
                 </div>
             </div>
