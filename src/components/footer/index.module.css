@@ -8,3 +8,36 @@
     line-height: 2.5rem;
     position: absolute;
 }
+
+.postlink {
+    float: left;
+    color: #fff;
+    padding-left: 50px;
+    cursor: pointer;
+    margin-top: -2.5rem;
+}
+
+.loginlink {
+    float: right;
+    color: #fff;
+    padding-right: 50px;
+    cursor: pointer;
+    margin-top: -2.5rem;
+}
+
+@media (max-width: 700px) {
+    .footer {
+        height: 5rem;
+    }
+    .footertext {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+    .postlink {
+        margin-top: 0;
+    }
+    .loginlink {
+        margin-top: 0;
+    }
+}
