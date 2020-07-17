@@ -1,0 +1,16 @@
+.notfoundcontainer {
+    text-align: center;
+}
+
+.img404 {
+    width: 30rem;
+    height: 20rem;
+    display: inline-block;
+}
+
+@media (max-width: 500px) {
+    .img404 {
+        width: 15rem;
+        height: 10rem;
+    }
+}
