@@ -7,7 +7,7 @@ const Header = () => {
         <header>
             <img src={logo} alt="UWC BLOG" />
             <ul className={styles.navitems}>
-                <li className={styles.navlink}><a href="/home">Home</a></li>
+                <li className={styles.navlink}><a href="/">Home</a></li>
                 <li className={styles.navlink}><a href="/about">About</a></li>
                 <li className={styles.navlink}><a href="/contact">Contact</a></li>
             </ul>

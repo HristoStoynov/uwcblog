@@ -22,7 +22,13 @@ class Home extends Component {
     renderPosts() {
         const { posts } = this.state
 
-        return posts.map(post => {
+        let postArray = [];
+
+        posts.map(genPost => {
+            return postArray.unshift(genPost)
+        })
+
+        return postArray.map(post => {
             return (
                 <Post key={post._id} {...post} />
             )
