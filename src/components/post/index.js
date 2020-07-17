@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './index.module.css'
 
-const Post = ({ createdAt, title, imageUrl }) => {
+const Post = ({ createdAt, title, imageUrl, _id }) => {
     return (
         <div className={styles.timelinebox}>
-            <a href="uwc.org" className={styles.timelinelink}>
+            <a href={"/view/" + _id} className={styles.timelinelink}>
                 <img src={imageUrl} alt="" className={styles.timelineimg} />
                 <div className={styles.imgblur}></div>
                 <h3 className={styles.timeline__date}>{createdAt}</h3>

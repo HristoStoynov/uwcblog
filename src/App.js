@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Header from './components/header';
 import Footer from './components/footer';
 import Home from './components/home';
@@ -9,16 +9,18 @@ import { Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className={styles.pagecontainer}>
-      <Header />
-      <div className={styles.contentwrap}>
-        <Router>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" exact component={About} />
-        </Router>
-      </div>
-      <Footer />
-    </div>
+    <Fragment>
+      <Router>
+        <div className={styles.pagecontainer}>
+          <Header />
+          <div className={styles.contentwrap}>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" exact component={About} />
+          </div>
+          <Footer />
+        </div>
+      </Router>
+    </Fragment>
   );
 }
 

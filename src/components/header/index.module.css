@@ -44,13 +44,17 @@ header img {
     border-bottom: solid 0.5rem #0063a6;
 }
 
-.navlink a {
+.navlink span {
     font-weight: 700;
     font-size: 1rem;
     letter-spacing: 0.2rem;
     text-transform: uppercase;
     text-decoration: none;
     color: inherit;
+}
+
+.linkat {
+    text-decoration: none;
 }
 
 @media (max-width: 700px) {
@@ -80,7 +84,7 @@ header img {
         margin-left: .5rem;
         margin-right: .5rem;
     }
-    .navlink a {
+    .navlink span {
         letter-spacing: 0.1rem;
     }
 }
