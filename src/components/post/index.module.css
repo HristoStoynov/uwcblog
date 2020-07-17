@@ -52,7 +52,6 @@
     position: relative;
     margin: 1rem 3rem 1rem 1rem;
     clear: both;
-    left: 4rem;
 }
 
 .timelinebox:after, .timelinebox:before {
@@ -69,18 +68,9 @@
     transform: rotate(45deg);
 }
 
-@media screen and (max-width: 700px) {
-    .timelinebox {
-        width: 44%;
-        margin: 1rem;
-        left: 0;
-    }
-}
-
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 850px) {
     .timelinebox:nth-of-type(2n) {
         float: right;
-        margin: 1rem;
         border-image: linear-gradient(to right, #009b90 0%, #009b90 100%);
         border-image-slice: 1;
     }
@@ -91,7 +81,12 @@
     }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 500px) {
+    .timelinebox {
+        width: 44%;
+        margin: 1rem;
+        left: 0;
+    }
     .timelinebox {
         height: 14rem;
         width: 14rem;
