@@ -1,13 +1,43 @@
-import React from 'react'
-//import styles from './index.module.css'
+import React, { Component } from 'react'
+import styles from './index.module.css'
 
-const View = () => {
-    return (
-        <div className={styles.notfoundcontainer}>
-            <img src={image} alt="404" className={styles.img404} />
-            <h1>Oopsie... Page not found... :(</h1>
-        </div>
-    )
+class View extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            title: null,
+            description: null
+        }
+    }
+
+    componentDidMount() {
+        this.getPost(this.props.match.params.id)
+    }
+
+    getPost = async (id) => {
+        const response = await fetch(`http://localhost:8000/api/post/getOne?id=${id}`)
+
+        const post = await response.json()
+        this.setState({
+            title: post.title,
+            description: post.description
+        })
+    }
+
+    render() {
+        const {
+            title,
+            description
+        } = this.state
+
+        return (
+            <div>
+                {title}
+                {description}
+            </div>
+        )
+    }
 }
 
 export default View

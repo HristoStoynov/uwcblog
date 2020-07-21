@@ -5,8 +5,8 @@ const Input = ({ label, id, onChange, value }) => {
     return (
         <div>
             <label htmlFor={id}>
-                {label}:
-          <input id={id} value={value} className={styles.loginInput} onChange={onChange} />
+                {label}:<br />
+                <input id={id} value={value} className={styles.loginInput} onChange={onChange} />
             </label>
         </div>
     )

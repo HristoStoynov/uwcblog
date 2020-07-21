@@ -1,14 +1,14 @@
-.loginSector {
+.registerSector {
     text-align: center;
     padding-top: 15vh;
 }
 
-.loginComp {
+.registerComp {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.loginBtn {
+.registerBtn {
     display: inline-block;
     font-weight: 400;
     color: #212529;
@@ -29,7 +29,7 @@
     border-color: #004b7e;
 }
 
-.loginBtn:hover {
+.registerBtn:hover {
     background-color: #004b7e;
     border-color: #003152
 }

@@ -12,7 +12,7 @@ class Home extends Component {
     }
 
     getPosts = async () => {
-        const promise = await fetch('http://localhost:8000/api/post/get')
+        const promise = await fetch('http://localhost:8000/api/post/getAll')
         const posts = await promise.json()
         this.setState({
             posts

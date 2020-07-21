@@ -5,7 +5,8 @@ import Home from './components/home';
 import About from './components/about';
 import Contact from './components/contact';
 import Login from './components/login';
-//import View from './components/view';
+import Register from './components/register';
+import View from './components/view';
 import NotFound from './components/notfound';
 import styles from './App.module.css';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -23,6 +24,8 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/view/:id" component={View} />
               <Route path="*" component={NotFound} />
             </Switch>
           </div>
