@@ -7,7 +7,9 @@ class View extends Component {
 
         this.state = {
             title: null,
-            description: null
+            description: null,
+            imageUrl: null,
+            createdAt: null
         }
     }
 
@@ -21,20 +23,27 @@ class View extends Component {
         const post = await response.json()
         this.setState({
             title: post.title,
-            description: post.description
+            description: post.description,
+            imageUrl: post.imageUrl,
+            createdAt: post.createdAt
         })
     }
 
     render() {
         const {
             title,
-            description
+            description,
+            imageUrl,
+            createdAt
         } = this.state
 
         return (
             <div>
                 {title}
+                <br />
                 {description}
+                <img src={imageUrl} />
+                {createdAt}
             </div>
         )
     }

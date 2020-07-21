@@ -33,3 +33,9 @@
     background-color: #004b7e;
     border-color: #003152
 }
+
+@media (max-width: 700px) {
+    .loginSector {
+        padding-top: 0vh;
+    }
+}
