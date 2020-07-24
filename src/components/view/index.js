@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './index.module.css'
+//import styles from './index.module.css'
 
 class View extends Component {
     constructor(props) {
@@ -42,7 +42,7 @@ class View extends Component {
                 {title}
                 <br />
                 {description}
-                <img src={imageUrl} />
+                <img src={imageUrl} alt=" " />
                 {createdAt}
             </div>
         )

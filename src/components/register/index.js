@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Input from '../input'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import styles from './index.module.css'
 
 class Register extends Component {
@@ -8,31 +8,133 @@ class Register extends Component {
         super(props)
 
         this.state = {
-            email: ' ',
-            password: ' ',
-            repeatPassword: ' '
+            username: '',
+            usernameError: false,
+            password: '',
+            passwordError: false,
+            repeatPassword: '',
+            repeatPasswordError: false,
+            regSuccess: false
+        }
+    }
+
+    changeUsername = value => {
+        this.setState({
+            username: value
+        })
+
+        if (!value.match(/^[A-Za-z0-9_]{6,16}$/)) {
+            this.setState({
+                usernameError: true
+            })
+        } else {
+            this.setState({
+                usernameError: false
+            })
+        }
+    }
+
+    changePassword = value => {
+        this.setState({
+            password: value
+        })
+
+        if (!value.match(/^[A-Za-z0-9_]{6,16}$/)) {
+            this.setState({
+                passwordError: true
+            })
+        } else {
+            this.setState({
+                passwordError: false
+            })
+        }
+    }
+
+    changeRePassword = value => {
+        this.setState({
+            repeatPassword: value
+        })
+
+        const { password } = this.state
+
+        if (value !== password) {
+            this.setState({
+                repeatPasswordError: true
+            })
+        } else {
+            this.setState({
+                repeatPasswordError: false
+            })
+        }
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const {
+            username,
+            password,
+            repeatPassword,
+            usernameError,
+            passwordError,
+            repeatPasswordError
+        } = this.state
+
+        if (!repeatPasswordError && !usernameError && !passwordError && password && username && repeatPassword) {
+            async function postData(url = '', data = {}) {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    Acces: true,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                return response.json();
+            }
+
+            postData('http://localhost:8000/api/user/register', { username: username, password: password, repeatPassword: repeatPassword })
+                .then(data => {
+                    return (
+                        <div>
+                            <Redirect to="/" />
+                        </div>
+                    )
+                });
+        } else {
+            this.setState({
+                regSuccess: true
+            })
         }
     }
 
     render() {
 
         const {
-            email,
+            username,
+            usernameError,
             password,
-            repeatPassword
+            passwordError,
+            repeatPassword,
+            repeatPasswordError,
+            regSuccess
         } = this.state
 
 
 
         return (
-            <div className={styles.registerSector}>
+            <form className={styles.registerSector} onSubmit={this.handleSubmit}>
                 <h2 className={styles.registerComp}>Register</h2>
-                <Input value={email} id="email" label="Email" />
-                <Input value={password} id="password" label="Password" />
-                <Input value={repeatPassword} id="repeatPassword" label="Repeat Password" />
+                <Input value={username} id="username" label="Username" onChange={this.changeUsername} />
+                {usernameError ? (<span className={styles.validator}>Username should be longer than 6 characters</span>) : null}
+                <Input value={password} id="password" label="Password" onChange={this.changePassword} type="password" />
+                {passwordError ? (<span className={styles.validator}>Password should be longer than 6 characters</span>) : null}
+                <Input value={repeatPassword} id="repeatPassword" label="Repeat Password" onChange={this.changeRePassword} type="password" />
+                {repeatPasswordError ? (<span className={styles.validator}>Passwords should match</span>) : null}
                 <p className={styles.registerComp}>Already have an account? <Link to="/login">Log In</Link></p>
-                <button className={styles.registerBtn}>Register</button>
-            </div>
+                <button type="submit" value="Submit" className={styles.registerBtn}>Register</button>
+                <br />
+                {regSuccess ? (<span className={styles.validator}>Check if everything is valid</span>) : null}
+            </form>
         )
     }
 }
