@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import styles from './index.module.css'
+import styles from './index.module.css'
 
 class View extends Component {
     constructor(props) {
@@ -39,11 +39,11 @@ class View extends Component {
 
         return (
             <div>
-                {title}
+                <h1 className={styles.title}>{title}</h1>
+                <h5 className={styles.subtitle}>{createdAt}</h5>
                 <br />
-                {description}
+                <p className={styles.paragraph}>{description}</p>
                 <img src={imageUrl} alt=" " />
-                {createdAt}
             </div>
         )
     }
