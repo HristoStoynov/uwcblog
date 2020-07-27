@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Input from '../input'
 import { Link, Redirect } from 'react-router-dom'
 import styles from './index.module.css'
+import authenticate from '../../utils/authenticate'
 
 class Register extends Component {
     constructor(props) {
@@ -68,7 +69,7 @@ class Register extends Component {
         }
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault()
         const {
             username,
@@ -80,26 +81,13 @@ class Register extends Component {
         } = this.state
 
         if (!repeatPasswordError && !usernameError && !passwordError && password && username && repeatPassword) {
-            async function postData(url = '', data = {}) {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    Acces: true,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                return response.json();
-            }
-
-            postData('http://localhost:8000/api/user/register', { username: username, password: password, repeatPassword: repeatPassword })
-                .then(data => {
-                    return (
-                        <div>
-                            <Redirect to="/" />
-                        </div>
-                    )
-                });
+            await authenticate('http://localhost:8000/api/user/register', { username: username, password: password, repeatPassword: repeatPassword }
+                , (user => {
+                    this.props.history.push('/')
+                })
+                , (e => {
+                    console.log("error")
+                }))
         } else {
             this.setState({
                 regSuccess: true

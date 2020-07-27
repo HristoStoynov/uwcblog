@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Input from '../input'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styles from './index.module.css'
+import authenticate from '../../utils/authenticate'
 
 class Login extends Component {
     constructor(props) {
@@ -25,30 +26,20 @@ class Login extends Component {
         })
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault()
         const {
             username,
             password
         } = this.state
 
-        async function postData(url = '', data = {}) {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            return response.json();
-        }
-
-        postData('http://localhost:8000/api/user/login', { username: username, password: password })
-            .then(data => {
-                return (
-                    <Redirect to="/" />
-                )
-            });
+        await authenticate('http://localhost:8000/api/user/login', { username: username, password: password }
+            , (user => {
+                this.props.history.push('/')
+            })
+            , (e => {
+                console.log("error")
+            }))
     }
 
     render() {

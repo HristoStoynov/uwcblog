@@ -1,0 +1,33 @@
+.title {
+    text-align: center;
+    color: #009b90;
+}
+
+.p_title {
+    color: #0063a6;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.sector {
+    width: 100vw;
+    height: 15rem;
+    padding-top: 30px;
+}
+
+.paragraph {
+    font-size: 1rem;
+}
+
+.p_sector {
+    float: right;
+    padding-right: 10vw;
+    width: 60vw;
+    padding-left: 30px;
+}
+
+.image {
+    float: left;
+    padding-left: 10vw;
+    width: 40vw;
+}
