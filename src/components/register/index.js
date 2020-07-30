@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Input from '../input'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styles from './index.module.css'
 import authenticate from '../../utils/authenticate'
 

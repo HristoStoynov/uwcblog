@@ -10,24 +10,59 @@
 }
 
 .sector {
-    width: 100vw;
-    height: 15rem;
-    padding-top: 30px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    text-align: center;
+    padding-bottom: 30px;
 }
 
 .paragraph {
     font-size: 1rem;
+    font: 400 1.0625em/1.5294117647 "Bliss 2", sans-serif;
+    letter-spacing: .015em;
 }
 
 .p_sector {
-    float: right;
-    padding-right: 10vw;
-    width: 60vw;
-    padding-left: 30px;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%
+}
+
+.imageBox {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    height: inherit;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .image {
-    float: left;
-    padding-left: 10vw;
-    width: 40vw;
+    max-height: 300px;
+    max-width: 450px;
+    vertical-align: middle;
+}
+
+@media (max-width: 1000px) {
+    .p_sector {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+    .imageBox {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 470px) {
+    .image {
+        height: 200px;
+        width: 300px;
+    }
 }
