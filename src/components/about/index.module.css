@@ -9,6 +9,13 @@
     text-align: center;
 }
 
+.last_title {
+    color: #0063a6;
+    font-size: 1.4rem;
+    display: block;
+    margin: auto;
+}
+
 .sector {
     display: -ms-flexbox;
     display: flex;
@@ -45,6 +52,11 @@
     vertical-align: middle;
 }
 
+.lang_img {
+    margin: auto;
+    display: block;
+}
+
 @media (max-width: 1000px) {
     .p_sector {
         -ms-flex: 0 0 100%;
@@ -58,11 +70,17 @@
         padding-bottom: 30px;
         padding-top: 30px;
     }
+    .lang_img {
+        width: 400px;
+    }
 }
 
 @media (max-width: 470px) {
     .image {
         height: 200px;
         width: 300px;
+    }
+    .lang_img {
+        width: 250px;
     }
 }
