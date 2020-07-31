@@ -43,7 +43,7 @@ class View extends Component {
                 <h5 className={styles.subtitle}>{createdAt}</h5>
                 <br />
                 <p className={styles.paragraph}>{description}</p>
-                <img src={imageUrl} alt=" " />
+                <img className={styles.image} src={imageUrl} alt=" " />
             </div>
         )
     }

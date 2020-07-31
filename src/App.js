@@ -7,6 +7,7 @@ import Contact from './components/contact';
 import Login from './components/login';
 import Register from './components/register';
 import View from './components/view';
+import Create from './components/create';
 import NotFound from './components/notfound';
 import styles from './App.module.css';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -25,6 +26,7 @@ function App() {
               <Route path="/contact" component={Contact} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/create" component={Create} />
               <Route path="/view/:id" component={View} />
               <Route path="*" component={NotFound} />
             </Switch>
