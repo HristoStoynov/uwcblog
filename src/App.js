@@ -1,41 +1,87 @@
-import React, { Fragment } from 'react';
-import Header from './components/header';
-import Footer from './components/footer';
-import Home from './components/home';
-import About from './components/about';
-import Contact from './components/contact';
-import Login from './components/login';
-import Register from './components/register';
-import View from './components/view';
-import Create from './components/create';
-import NotFound from './components/notfound';
-import styles from './App.module.css';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import React, { Component } from 'react'
+import UserContext from './Context'
 
-function App() {
-  return (
-    <Fragment>
-      <Router>
-        <div className={styles.pagecontainer}>
-          <Header />
-          <div className={styles.contentwrap}>
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/create" component={Create} />
-              <Route path="/view/:id" component={View} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </div>
-          <Footer />
-        </div>
-      </Router>
-    </Fragment>
-  );
+function getCookie(name) {
+  const cookieValue = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return cookieValue ? cookieValue[2] : null;
+}
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      loggedIn: null,
+      user: null
+    }
+  }
+
+  logIn = (user) => {
+    this.setState({
+      loggedIn: true,
+      user
+    })
+  }
+
+  logOut = () => {
+    document.cookie = "x-auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    this.setState({
+      loggedIn: false,
+      user: null
+    })
+  }
+
+  componentDidMount() {
+    const token = getCookie('x-auth-token')
+
+    if (!token) {
+      this.logOut()
+      return
+    }
+
+    fetch('http://localhost:9999/api/user/verify', {
+      method: 'POST',
+      body: JSON.stringify({
+        token
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(promise => {
+      console.log(promise)
+      return promise.json()
+    }).then(response => {
+      if (response.status) {
+        this.logIn({
+          username: response.user.username,
+          id: response.user._id
+        })
+      } else {
+        this.logOut()
+      }
+    })
+  }
+
+  render() {
+    const {
+      loggedIn,
+      user
+    } = this.state
+
+    if (loggedIn === null) {
+      return (<div>Loading...</div>)
+    }
+
+    return (
+      <UserContext.Provider value={{
+        loggedIn,
+        user,
+        logIn: this.logIn,
+        logOut: this.logOut
+      }}>
+        {this.props.children}
+      </UserContext.Provider>
+    )
+  }
 }
 
-export default App;
+export default App

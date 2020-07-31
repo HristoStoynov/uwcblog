@@ -3,6 +3,7 @@ import Input from '../input'
 import { Link } from 'react-router-dom'
 import styles from './index.module.css'
 import authenticate from '../../utils/authenticate'
+import Context from '../../Context'
 
 class Login extends Component {
     constructor(props) {
@@ -13,6 +14,8 @@ class Login extends Component {
             password: ''
         }
     }
+
+    static contextType = Context
 
     changeUsername = value => {
         this.setState({
@@ -35,6 +38,7 @@ class Login extends Component {
 
         await authenticate('http://localhost:8000/api/user/login', { username: username, password: password }
             , (user => {
+                this.context.logIn(user)
                 this.props.history.push('/')
             })
             , (e => {

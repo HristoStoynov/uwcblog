@@ -3,6 +3,7 @@ import Input from '../input'
 import { Link } from 'react-router-dom'
 import styles from './index.module.css'
 import authenticate from '../../utils/authenticate'
+import Context from '../../Context'
 
 class Register extends Component {
     constructor(props) {
@@ -18,6 +19,8 @@ class Register extends Component {
             regSuccess: false
         }
     }
+
+    static contextType = Context
 
     changeUsername = value => {
         this.setState({
@@ -83,6 +86,7 @@ class Register extends Component {
         if (!repeatPasswordError && !usernameError && !passwordError && password && username && repeatPassword) {
             await authenticate('http://localhost:8000/api/user/register', { username: username, password: password, repeatPassword: repeatPassword }
                 , (user => {
+                    this.context.logIn(user)
                     this.props.history.push('/')
                 })
                 , (e => {
