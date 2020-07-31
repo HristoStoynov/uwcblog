@@ -38,7 +38,7 @@ class App extends Component {
       return
     }
 
-    fetch('http://localhost:9999/api/user/verify', {
+    fetch('http://localhost:8000/api/user/verify', {
       method: 'POST',
       body: JSON.stringify({
         token
