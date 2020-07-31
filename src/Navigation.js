@@ -10,10 +10,13 @@ import View from './components/view';
 import Create from './components/create';
 import NotFound from './components/notfound';
 import styles from './Navigation.module.css';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+import Context from './Context'
 
 function Navigation() {
+    const loggedIn = Context._currentValue.loggedIn
+    console.log(loggedIn)
     return (
         <Fragment>
             <Router>
@@ -26,7 +29,7 @@ function Navigation() {
                             <Route path="/contact" component={Contact} />
                             <Route path="/login" component={Login} />
                             <Route path="/register" component={Register} />
-                            <Route path="/create" component={Create} />
+                            {loggedIn ? (<Route path="/create" component={Create} />) : <Redirect to="/login" />}
                             <Route path="/view/:id" component={View} />
                             <Route path="*" component={NotFound} />
                         </Switch>
