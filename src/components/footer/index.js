@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Context from '../../Context'
 
 class Footer extends Component {
@@ -11,7 +11,7 @@ class Footer extends Component {
 
     log() {
         this.context.logOut()
-        //this.props.history.push('/')
+        this.props.history.push('/')
     }
 
     render() {
@@ -25,4 +25,4 @@ class Footer extends Component {
     }
 }
 
-export default Footer
+export default withRouter(Footer)

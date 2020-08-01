@@ -27,10 +27,10 @@ function Navigation() {
                             <Route path="/" exact component={Home} />
                             <Route path="/about" component={About} />
                             <Route path="/contact" component={Contact} />
-                            <Route path="/login" component={Login} />
-                            <Route path="/register" component={Register} />
-                            {loggedIn ? (<Route path="/create" component={Create} />) : <Redirect to="/login" />}
                             <Route path="/view/:id" component={View} />
+                            <Route path="/create" component={loggedIn ? (Create) : (Login)} />
+                            <Route path="/login" component={loggedIn ? (Home) : (Login)} />
+                            <Route path="/register" component={loggedIn ? (Home) : (Register)} />
                             <Route path="*" component={NotFound} />
                         </Switch>
                     </div>

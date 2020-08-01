@@ -39,7 +39,6 @@ class Login extends Component {
         await authenticate('http://localhost:8000/api/user/login', { username: username, password: password }
             , (user => {
                 this.context.logIn(user)
-                this.context.loggedIn = true;
                 this.props.history.push('/')
             })
             , (e => {

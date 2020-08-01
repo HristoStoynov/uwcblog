@@ -5,6 +5,7 @@ function getCookie(name) {
   const cookieValue = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
   return cookieValue ? cookieValue[2] : null;
 }
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -18,15 +19,14 @@ class App extends Component {
   logIn = (user) => {
     this.setState({
       loggedIn: true,
-      user
+      ...user
     })
   }
 
   logOut = () => {
     document.cookie = "x-auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     this.setState({
-      loggedIn: false,
-      user: null
+      loggedIn: false
     })
   }
 
