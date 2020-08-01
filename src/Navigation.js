@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Header from './components/header';
 import Footer from './components/footer';
 import Home from './components/home';
@@ -15,8 +15,7 @@ import { Route } from 'react-router-dom';
 import Context from './Context'
 
 function Navigation() {
-    const loggedIn = Context._currentValue.loggedIn
-    console.log(loggedIn)
+    const loggedIn = useContext(Context).loggedIn
     return (
         <Fragment>
             <Router>
@@ -26,11 +25,11 @@ function Navigation() {
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/about" component={About} />
-                            <Route path="/contact" component={Contact} />
                             <Route path="/view/:id" component={View} />
-                            <Route path="/create" component={loggedIn ? (Create) : (Login)} />
-                            <Route path="/login" component={loggedIn ? (Home) : (Login)} />
-                            <Route path="/register" component={loggedIn ? (Home) : (Register)} />
+                            <Route path="/create">{loggedIn ? (<Create />) : (<Redirect to="/login" />)}</Route>
+                            <Route path="/contact">{loggedIn ? (<Contact />) : (<Redirect to="/login" />)}</Route>
+                            <Route path="/login">{loggedIn ? (<Redirect to="/" />) : (<Login />)}</Route>
+                            <Route path="/register">{loggedIn ? (<Redirect to="/" />) : (<Register />)}</Route>
                             <Route path="*" component={NotFound} />
                         </Switch>
                     </div>
