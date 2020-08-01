@@ -19,51 +19,84 @@ class Contact extends Component {
 
     static contextType = Context
 
-    changeUsername = value => {
+    changeTitle = value => {
         this.setState({
-            username: value
+            title: value
         })
     }
 
-    changePassword = value => {
+    changeDescription = value => {
         this.setState({
-            password: value
+            description: value
         })
     }
+
+    changeImageUrl = value => {
+        this.setState({
+            imageUrl: value
+        })
+    }
+
+    changeCreatedAt = value => {
+        this.setState({
+            createdAt: value
+        })
+    }
+
 
     handleSubmit = async (event) => {
         event.preventDefault()
         const {
-            username,
-            password
+            title,
+            description,
+            imageUrl,
+            createdAt
         } = this.state
 
-        await authenticate('http://localhost:8000/api/user/login', { username: username, password: password }
-            , (user => {
-                this.context.logIn(user)
-                this.props.history.push('/')
+        try {
+            const body = {
+                title: title,
+                description: description,
+                imageUrl: imageUrl,
+                createdAt: createdAt
+            }
+            const promise = await fetch('http://localhost:8000/api/post/create', {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-            , (e => {
-                console.log("error")
-            }))
+
+            const response = await promise.json()
+
+            if (response) {
+                this.props.history.push('/')
+            } else {
+                console.log('error')
+            }
+        } catch (e) {
+            console.log('error')
+        }
     }
 
     render() {
 
         const {
-            username,
-            password
+            title,
+            description,
+            imageUrl,
+            createdAt
         } = this.state
-
-
 
         return (
             <form className={styles.loginSector} onSubmit={this.handleSubmit}>
-                <h2 className={styles.loginComp}>Log In</h2>
-                <Input value={username} id="username" label="Username" onChange={this.changeUsername} />
-                <Input value={password} id="password" label="Password" onChange={this.changePassword} type="password" />
-                <p className={styles.loginComp}>Don't have an account? <Link to="/register">Register</Link></p>
-                <button type="submit" value="Submit" className={styles.loginBtn}>Log In</button>
+                <h2 className={styles.loginComp}>Create Post</h2>
+                <Input value={title} id="title" label="Title" onChange={this.changeTitle} />
+                <Input value={description} id="description" label="Description" onChange={this.changeDescription} />
+                <Input value={imageUrl} id="imageUrl" label="Image URL" onChange={this.changeImageUrl} />
+                <Input value={createdAt} id="createdAt" label="Date" onChange={this.changeCreatedAt} />
+                <button type="submit" value="Submit" className={styles.loginBtn}>Create</button>
             </form>
         )
     }
