@@ -36,6 +36,10 @@
     border-color: #004b7e;
 }
 
+.validator {
+    color: red;
+}
+
 .createBtn:hover {
     background-color: #004b7e;
     border-color: #003152
