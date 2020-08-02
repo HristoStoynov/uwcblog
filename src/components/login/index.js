@@ -37,9 +37,8 @@ class Login extends Component {
         } = this.state
 
         await authenticate('http://localhost:8000/api/user/login', { username: username, password: password }
-            , (user => {
-                this.context.logIn(user)
-                this.props.history.push('/')
+            , (id => {
+                this.context.logIn(id)
             })
             , (e => {
                 console.log("error")

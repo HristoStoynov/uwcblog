@@ -25,9 +25,9 @@ class Contact extends Component {
         })
     }
 
-    changeDescription = value => {
+    changeDescription = event => {
         this.setState({
-            description: value
+            description: event.target.value
         })
     }
 
@@ -58,23 +58,26 @@ class Contact extends Component {
                 title: title,
                 description: description,
                 imageUrl: imageUrl,
-                createdAt: createdAt
+                createdAt: createdAt,
+                creator: this.context.id
             }
-            const promise = await fetch('http://localhost:8000/api/post/create', {
+            console.log(body)
+            fetch('http://localhost:8000/api/post/create', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-
-            const response = await promise.json()
-
-            if (response) {
-                this.props.history.push('/')
-            } else {
-                console.log('error')
-            }
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    this.props.history.push('/')
+                })
+                .catch(e => {
+                    console.log('error')
+                })
         } catch (e) {
             console.log('error')
         }
@@ -86,17 +89,22 @@ class Contact extends Component {
             title,
             description,
             imageUrl,
-            createdAt
+            createdAt,
         } = this.state
 
         return (
-            <form className={styles.loginSector} onSubmit={this.handleSubmit}>
-                <h2 className={styles.loginComp}>Create Post</h2>
+            <form className={styles.createSector} onSubmit={this.handleSubmit}>
+                <h2 className={styles.createComp}>Create Post</h2>
                 <Input value={title} id="title" label="Title" onChange={this.changeTitle} />
-                <Input value={description} id="description" label="Description" onChange={this.changeDescription} />
+                <div>
+                    <label htmlFor='description'>
+                        Description:<br />
+                        <textarea id='description' value={description} className={styles.createInput} onChange={this.changeDescription} rows="3" ></textarea>
+                    </label>
+                </div>
                 <Input value={imageUrl} id="imageUrl" label="Image URL" onChange={this.changeImageUrl} />
                 <Input value={createdAt} id="createdAt" label="Date" onChange={this.changeCreatedAt} />
-                <button type="submit" value="Submit" className={styles.loginBtn}>Create</button>
+                <button type="submit" value="Submit" className={styles.createBtn}>Create</button>
             </form>
         )
     }

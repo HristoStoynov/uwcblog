@@ -12,14 +12,14 @@ class App extends Component {
 
     this.state = {
       loggedIn: null,
-      user: null
+      id: null,
     }
   }
 
-  logIn = (user) => {
+  logIn = (id) => {
     this.setState({
       loggedIn: true,
-      ...user
+      id: id
     })
   }
 
@@ -51,10 +51,9 @@ class App extends Component {
       return promise.json()
     }).then(response => {
       if (response.status) {
-        this.logIn({
-          username: response.user.username,
-          id: response.user._id
-        })
+        this.logIn(
+          response.user._id
+        )
       } else {
         this.logOut()
       }
@@ -64,7 +63,7 @@ class App extends Component {
   render() {
     const {
       loggedIn,
-      user
+      id
     } = this.state
 
     if (loggedIn === null) {
@@ -74,7 +73,7 @@ class App extends Component {
     return (
       <UserContext.Provider value={{
         loggedIn,
-        user,
+        id: id,
         logIn: this.logIn,
         logOut: this.logOut
       }}>
