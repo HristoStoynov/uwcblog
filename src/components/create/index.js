@@ -61,7 +61,6 @@ class Contact extends Component {
                 createdAt: createdAt,
                 creator: this.context.id
             }
-            console.log(body)
             fetch('http://localhost:8000/api/post/create', {
                 method: 'POST',
                 body: JSON.stringify(body),

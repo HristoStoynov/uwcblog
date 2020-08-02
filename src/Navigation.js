@@ -16,8 +16,6 @@ import Context from './Context'
 
 function Navigation() {
     const loggedIn = useContext(Context).loggedIn
-    console.log(useContext(Context).loggedIn)
-    console.log(useContext(Context).id)
     return (
         <Fragment>
             <Router>
