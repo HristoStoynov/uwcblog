@@ -7,8 +7,15 @@ class Home extends Component {
         super(props)
 
         this.state = {
-            posts: []
+            posts: [],
+            searchValue: ''
         }
+    }
+
+    searchChange = (event) => {
+        this.setState({
+            searchValue: event.target.value
+        })
     }
 
     getPosts = async () => {
@@ -19,7 +26,7 @@ class Home extends Component {
         })
     }
 
-    renderPosts() {
+    renderPosts(searchValue) {
         const { posts } = this.state
 
         let postArray = [];
@@ -28,9 +35,17 @@ class Home extends Component {
             return postArray.unshift(genPost)
         })
 
+        const r = `.*${searchValue.toLowerCase()}.*`
+        const regex = new RegExp(r)
+
         return postArray.map(post => {
+            if (post.title.toLowerCase().match(regex)) {
+                return (
+                    <Post key={post._id} {...post} />
+                )
+            }
             return (
-                <Post key={post._id} {...post} />
+                <div></div>
             )
         })
     }
@@ -40,14 +55,18 @@ class Home extends Component {
     }
 
     render() {
+        const { searchValue } = this.state
         const yearClasses = styles.timeline__item + " " + styles.timeline__itemyear
 
         return (
             <div>
                 <h1 className={styles.timelineheading}>My UWC Timeline</h1>
+                <div className={styles.searchBox}>
+                    <input type="text" placeholder="Search by title" value={searchValue} className={styles.searchInput} onChange={this.searchChange}></input>
+                </div>
                 <div className={styles.timeline}>
                     <h2 className={yearClasses}>2020</h2>
-                    {this.renderPosts()}
+                    {this.renderPosts(searchValue)}
                 </div>
             </div>
         )

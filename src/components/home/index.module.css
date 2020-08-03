@@ -35,6 +35,17 @@
     }
 }
 
+.searchBox {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.searchInput {
+    height: 30px;
+    width: 300px;
+}
+
 .timeline__item {
     border: 2px solid #009b90;
     border-image: linear-gradient(to right, #009b90 0%, #009b90 100%);
