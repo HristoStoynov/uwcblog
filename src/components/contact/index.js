@@ -4,7 +4,7 @@ import Context from '../../Context'
 
 const Contact = () => {
     const [text, setText] = useState('')
-    //const [answer, setAnswer] = useState('')
+    const [answer, setAnswer] = useState('')
     const [comments, setComments] = useState([])
 
     const MyContext = useContext(Context)
@@ -13,15 +13,15 @@ const Contact = () => {
         getComments()
     })
 
-    const changeText = (value) => {
-        setText(value)
-    }
-
     const getComments = async () => {
         const promise = await fetch('http://localhost:8000/api/comment/getAll')
         const comment = await promise.json()
 
-        setComments(comment)
+        return setComments(comment)
+    }
+
+    const changeText = (value) => {
+        setText(value)
     }
 
     const submitText = () => {
@@ -57,6 +57,10 @@ const Contact = () => {
         }
     }
 
+    const submitAnswer = (text) => {
+        console.log(text)
+    }
+
     return (
         <div>
             <label htmlFor="comment">Leave a message:</label>
@@ -67,9 +71,10 @@ const Contact = () => {
             <div>
                 {comments.map((comment) => {
                     return (
-                        <div>
-                            <div> {comment.creator} </div>
+                        <div key={comment._id}>
                             <div> {comment.text} </div>
+                            <input type="text"></input>
+                            <button type="button" onClick={submitAnswer.bind(comment.text)}>Answer</button>
                         </div>
                     )
                 })}
