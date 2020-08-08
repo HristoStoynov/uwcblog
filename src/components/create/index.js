@@ -121,7 +121,6 @@ class Contact extends Component {
                         return response.json()
                     })
                     .then(data => {
-                        //this.props.history.push('/')
                     })
                     .catch(e => {
                         this.setState({
