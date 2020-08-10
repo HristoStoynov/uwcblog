@@ -4,7 +4,7 @@ import styles from './index.module.css'
 
 const Contact = () => {
     const [text, setText] = useState('')
-    const [answer, setAnswer] = useState('')
+    //const [answer, setAnswer] = useState('')
     const [comments, setComments] = useState([])
 
     const MyContext = useContext(Context)

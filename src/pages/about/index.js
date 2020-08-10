@@ -37,8 +37,8 @@ const About = () => {
             <div className={styles.sector}>
                 <h4 className={styles.last_title}>About the Blog</h4>
                 <p className={styles.paragraph}>Thanks for reading my blog. It was made entirely by myself using up-to-date web technologies. The back-end was
-                made using Express.js with a mongo database and can be found <a target="_blank" href="https://github.com/HristoStoynov/uwcblog-api">here</a>. The front-end
-                was made using React.js, html and css and can be found <a target="_blank" href="https://github.com/HristoStoynov/uwcblog">here</a>.
+                made using Express.js with a mongo database and can be found <a rel="noopener noreferrer" target="_blank" href="https://github.com/HristoStoynov/uwcblog-api">here</a>. The front-end
+                was made using React.js, html and css and can be found <a rel="noopener noreferrer" target="_blank" href="https://github.com/HristoStoynov/uwcblog">here</a>.
                 The design is similar to the official UWC website but also has many major differences. If you want to use the design for your own UWC blog,
                 reach me out on Instagram  @itso.was.here and we can find a way to make it work. The blog is made for a SoftUni Examination on ReactJS course.</p>
                 <img className={styles.lang_img} src="https://i.ibb.co/RDtjyrY/lang.png" alt=" " border="0" />
