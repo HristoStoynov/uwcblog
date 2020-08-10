@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
 import Context from '../../Context'
+import { withRouter } from "react-router-dom";
 
 class View extends Component {
     constructor(props) {
@@ -36,36 +37,27 @@ class View extends Component {
         })
     }
 
-    handleDelete = () => {
+    handleDelete = async (event) => {
+        event.preventDefault()
         const {
             id
         } = this.state
 
-        try {
-            const body = {
-                postId: id,
-                userId: this.context.id
-            }
-
-            fetch('http://localhost:8000/api/post/delete', {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-                    this.props.history.push('/')
-                })
-                .catch(e => {
-                    console.log('error')
-                })
-        } catch (e) {
-            console.log('error')
+        const body = {
+            userId: this.context.id
         }
+
+        const request = await fetch(`http://localhost:8000/api/post/delete?id=${id}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const response = await request.json()
+
+        this.props.history.push('/')
     }
 
     render() {
@@ -84,7 +76,9 @@ class View extends Component {
                 {this.context.id !== creator ? null : (
                     <div>
                         <button>Edit</button>
-                        <button onClick={this.handleDelete}>Delete</button>
+                        <form onSubmit={this.handleDelete}>
+                            <button type="submit" value="Submit">Delete</button>
+                        </form>
                     </div>
                 )}
                 <br />
@@ -95,4 +89,4 @@ class View extends Component {
     }
 }
 
-export default View
+export default withRouter(View)

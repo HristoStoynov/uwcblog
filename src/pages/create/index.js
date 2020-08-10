@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Input from '../../components/input'
 import styles from './index.module.css'
 import Context from '../../Context'
+import { withRouter } from "react-router-dom";
 
 class Contact extends Component {
     constructor(props) {
@@ -121,6 +122,7 @@ class Contact extends Component {
                         return response.json()
                     })
                     .then(data => {
+                        this.props.history.push('/')
                     })
                     .catch(e => {
                         this.setState({
@@ -176,4 +178,4 @@ class Contact extends Component {
     }
 }
 
-export default Contact
+export default withRouter(Contact)
