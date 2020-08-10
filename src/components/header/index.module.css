@@ -64,7 +64,7 @@ header img {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     }
-    header img {
+    .link {
         display: block;
         margin-left: auto;
         margin-right: auto;

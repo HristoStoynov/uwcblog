@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Context from '../../Context'
-//import styles from './index.module.css'
+import styles from './index.module.css'
 
 const Contact = () => {
     const [text, setText] = useState('')
@@ -61,6 +61,9 @@ const Contact = () => {
         console.log(text)
     }
 
+    const openAnswer = (id) => {
+    }
+
     return (
         <div>
             <label htmlFor="comment">Leave a message:</label>
@@ -68,16 +71,18 @@ const Contact = () => {
                 <textarea type="text" id="comment" onChange={(e) => changeText(e.target.value)} value={text} />
             </div>
             <button onClick={submitText}>asd</button>
-            <div>
+            <div>m
                 {comments.map((comment) => {
-                    return (
-                        <div key={comment._id}>
-                            <div> {comment.text} </div>
-                            <input type="text"></input>
-                            <button type="button" onClick={submitAnswer.bind(comment.text)}>Answer</button>
-                        </div>
-                    )
-                })}
+                return (
+                    <div key={comment._id}>
+                        <div> {comment.text} </div>
+                        <input type="text"></input>
+                        <button type="button" className={styles.openAnswer} onClick={openAnswer}>\/</button>
+                        <button type="button" className={styles.closeAnswer + comment._id} onClick={submitAnswer.bind(comment.text)}>/\</button>
+                        <button type="button" onClick={submitAnswer.bind(comment.text)}>Answer</button>
+                    </div>
+                )
+            })}
             </div>
         </div>
     )
