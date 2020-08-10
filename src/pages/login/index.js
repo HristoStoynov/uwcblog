@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Input from '../input'
+import Input from '../../components/input'
 import { Link } from 'react-router-dom'
 import styles from './index.module.css'
 import authenticate from '../../utils/authenticate'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Input from '../input'
+import Input from '../../components/input'
 import styles from './index.module.css'
 import Context from '../../Context'
 
