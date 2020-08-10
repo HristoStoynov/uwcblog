@@ -11,7 +11,8 @@ class Login extends Component {
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            error: false
         }
     }
 
@@ -41,7 +42,9 @@ class Login extends Component {
                 this.context.logIn(id)
             })
             , (e => {
-                console.log("error")
+                this.setState({
+                    error: true
+                })
             }))
     }
 
@@ -49,7 +52,8 @@ class Login extends Component {
 
         const {
             username,
-            password
+            password,
+            error
         } = this.state
 
 
@@ -61,6 +65,7 @@ class Login extends Component {
                 <Input value={password} id="password" label="Password" onChange={this.changePassword} type="password" />
                 <p className={styles.loginComp}>Don't have an account? <Link to="/register">Register</Link></p>
                 <button type="submit" value="Submit" className={styles.loginBtn}>Log In</button>
+                {error ? (<div className={styles.validator}>Username and password don't match.</div>) : null}
             </form>
         )
     }

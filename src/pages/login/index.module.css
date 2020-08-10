@@ -8,6 +8,10 @@
     margin-bottom: 10px;
 }
 
+.validator {
+    color: red;
+}
+
 .loginBtn {
     display: inline-block;
     font-weight: 400;
