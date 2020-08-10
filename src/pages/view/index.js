@@ -39,6 +39,7 @@ class View extends Component {
 
     handleDelete = async (event) => {
         event.preventDefault()
+
         const {
             id
         } = this.state
@@ -47,17 +48,26 @@ class View extends Component {
             userId: this.context.id
         }
 
-        const request = await fetch(`http://localhost:8000/api/post/delete?id=${id}`, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const response = await request.json()
-
-        this.props.history.push('/')
+        try {
+            fetch(`http://localhost:8000/api/post/delete?id=${id}`, {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .this((val) => {
+                    return val.json()
+                })
+                .then(data => {
+                    this.props.history.push('/')
+                })
+                .catch(e => {
+                    return console.log(e)
+                })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     render() {
