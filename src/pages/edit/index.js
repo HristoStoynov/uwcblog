@@ -9,6 +9,7 @@ class Edit extends Component {
         super(props)
 
         this.state = {
+            id: null,
             title: '',
             titleError: false,
             description: '',
@@ -96,6 +97,7 @@ class Edit extends Component {
 
         const post = await response.json()
         this.setState({
+            id: post._id,
             title: post.title,
             description: post.description,
             imageUrl: post.imageUrl,
@@ -103,6 +105,60 @@ class Edit extends Component {
             creator: post.creator,
             id: post._id
         })
+    }
+
+    handleSubmit = async (event) => {
+        event.preventDefault()
+        const {
+            id,
+            title,
+            description,
+            imageUrl,
+            createdAt,
+            titleError,
+            descriptionError,
+            imageUrlError,
+            createdAtError
+        } = this.state
+
+        if (title && description && createdAt && imageUrl && !titleError && !descriptionError && !imageUrlError && !createdAtError) {
+            try {
+                const body = {
+                    title: title,
+                    description: description,
+                    imageUrl: imageUrl,
+                    createdAt: createdAt,
+                    creator: this.context.id
+                }
+
+                fetch(`http://localhost:8000/api/post/update?id=${id}`, {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        this.props.history.push('/')
+                    })
+                    .catch(e => {
+                        this.setState({
+                            editSuccess: true
+                        })
+                    })
+            } catch (e) {
+                this.setState({
+                    editSuccess: true
+                })
+            }
+        } else {
+            this.setState({
+                editSuccess: true
+            })
+        }
     }
 
     render() {

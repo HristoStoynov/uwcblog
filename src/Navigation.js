@@ -27,8 +27,8 @@ function Navigation() {
                             <Route path="/" exact component={Home} />
                             <Route path="/about" component={About} />
                             <Route path="/view/:id" component={View} />
-                            <Route path="/edit/:id" component={Edit} />
                             <Route path="/create">{loggedIn ? (<Create />) : (<Redirect to="/login" />)}</Route>
+                            <Route path="/edit/:id">{loggedIn ? (<Edit />) : (<Redirect to="/login" />)}</Route>
                             <Route path="/contact">{loggedIn ? (<Contact />) : (<Redirect to="/login" />)}</Route>
                             <Route path="/login">{loggedIn ? (<Redirect to="/" />) : (<Login />)}</Route>
                             <Route path="/register">{loggedIn ? (<Redirect to="/" />) : (<Register />)}</Route>
