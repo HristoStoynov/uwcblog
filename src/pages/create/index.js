@@ -3,6 +3,7 @@ import Input from '../../components/input'
 import styles from './index.module.css'
 import Context from '../../Context'
 import { withRouter } from "react-router-dom";
+import getCookie from '../../utils/cookie'
 
 class Contact extends Component {
     constructor(props) {
@@ -115,7 +116,8 @@ class Contact extends Component {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': getCookie('x-auth-token')
                     }
                 })
                     .then(response => {

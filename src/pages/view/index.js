@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
 import Context from '../../Context'
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom"
+import getCookie from '../../utils/cookie'
 
 class View extends Component {
     constructor(props) {
@@ -53,13 +54,11 @@ class View extends Component {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': getCookie('x-auth-token')
                 }
             })
                 .this((val) => {
-                    return val.json()
-                })
-                .then(data => {
                     this.props.history.push('/')
                 })
                 .catch(e => {

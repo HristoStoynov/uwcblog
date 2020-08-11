@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
 import Context from '../../Context'
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom"
 import Input from '../../components/input'
+import getCookie from '../../utils/cookie'
 
 class Edit extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class Edit extends Component {
             imageUrlError: false,
             createdAt: '',
             createdAtError: false,
-            editSuccess: false
+            editSuccess: false,
         }
     }
 
@@ -103,7 +104,6 @@ class Edit extends Component {
             imageUrl: post.imageUrl,
             createdAt: post.createdAt,
             creator: post.creator,
-            id: post._id
         })
     }
 
@@ -131,18 +131,16 @@ class Edit extends Component {
                     creator: this.context.id
                 }
 
-                fetch(`http://localhost:8000/api/post/update?id=${id}`, {
+                await fetch(`http://localhost:8000/api/post/update?id=${id}`, {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': getCookie('x-auth-token')
                     }
                 })
                     .then(response => {
-                        return response.json()
-                    })
-                    .then(data => {
-                        this.props.history.push('/')
+                        this.props.history.push(`/view/${id}`)
                     })
                     .catch(e => {
                         this.setState({
@@ -172,7 +170,7 @@ class Edit extends Component {
             imageUrlError,
             createdAt,
             createdAtError,
-            editSuccess
+            editSuccess,
         } = this.state
 
         return (

@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Context from '../../Context'
-import styles from './index.module.css'
+//import styles from './index.module.css'
 
 const Contact = () => {
     const [text, setText] = useState('')
-    //const [answer, setAnswer] = useState('')
+    const [answer, setAnswer] = useState({})
     const [comments, setComments] = useState([])
 
     const MyContext = useContext(Context)
@@ -57,11 +57,14 @@ const Contact = () => {
         }
     }
 
-    const submitAnswer = (text) => {
-        console.log(text)
+    const changeAnswer = (e, id) => {
+        setAnswer({
+            id: e
+        })
     }
 
-    const openAnswer = (id) => {
+    const submitAnswer = (id) => {
+
     }
 
     return (
@@ -71,21 +74,28 @@ const Contact = () => {
                 <textarea type="text" id="comment" onChange={(e) => changeText(e.target.value)} value={text} />
             </div>
             <button onClick={submitText}>Ask</button>
-            <div>m
+            <div>
                 {comments.map((comment) => {
-                return (
-                    <div key={comment._id}>
-                        <div> {comment.text} </div>
-                        <input type="text"></input>
-                        <button type="button" className={styles.openAnswer} onClick={openAnswer}>\/</button>
-                        <button type="button" className={styles.closeAnswer + comment._id} onClick={submitAnswer.bind(comment.text)}>/\</button>
-                        <button type="button" onClick={submitAnswer.bind(comment.text)}>Answer</button>
-                    </div>
-                )
-            })}
+                    return (
+                        <div key={comment._id}>
+                            <div> {comment.text} </div>
+                            {comment.answer ? null : (
+                                <div>
+                                    <input type="text" value={answer[comment._id]} onChange={(e) => changeAnswer(comment._id, e.target.value)}></input>
+                                    <button onClick={() => submitAnswer(comment._id)}>Answer</button>
+                                </div>
+                            )}
+
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )
 }
+
+//<button type="button" className={styles.openAnswer} onClick={openAnswer}>\/</button>
+//                          <button type="button" className={styles.closeAnswer + comment._id} onClick={submitAnswer.bind(comment.text)}>/\</button>
+//                        <button type="button" onClick={submitAnswer.bind(comment.text)}>Answer</button>
 
 export default Contact
