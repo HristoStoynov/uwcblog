@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Context from '../../Context'
 //import styles from './index.module.css'
+import getCookie from '../../utils/cookie'
 
 const Contact = () => {
     const [text, setText] = useState('')
@@ -43,6 +44,7 @@ const Contact = () => {
                         return response.json()
                     })
                     .then(data => {
+                        setText('')
                     })
                     .catch(e => {
                         console.log('error1')
@@ -57,14 +59,33 @@ const Contact = () => {
         }
     }
 
-    const changeAnswer = (e, id) => {
+    const changeAnswer = (id, e) => {
         setAnswer({
-            id: e
+            [id]: e
         })
     }
 
     const submitAnswer = (id) => {
 
+        const body = {
+            answer: answer[id]
+        }
+
+        if (answer) {
+            fetch(`http://localhost:8000/api/comment/answer?id=${id}`, {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getCookie('x-auth-token')
+                }
+            })
+                .then(response => {
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        }
     }
 
     return (
@@ -79,12 +100,14 @@ const Contact = () => {
                     return (
                         <div key={comment._id}>
                             <div> {comment.text} </div>
-                            {comment.answer ? null : (
-                                <div>
-                                    <input type="text" value={answer[comment._id]} onChange={(e) => changeAnswer(comment._id, e.target.value)}></input>
-                                    <button onClick={() => submitAnswer(comment._id)}>Answer</button>
-                                </div>
-                            )}
+                            {comment.answer ? (
+                                <div>{comment.answer}</div>
+                            ) : (
+                                    <div>
+                                        <input type="text" value={answer[comment._id]} onChange={(e) => changeAnswer(comment._id, e.target.value)}></input>
+                                        <button onClick={() => submitAnswer(comment._id)}>Answer</button>
+                                    </div>
+                                )}
 
                         </div>
                     )
