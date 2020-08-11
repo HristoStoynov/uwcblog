@@ -7,6 +7,7 @@ import Contact from './pages/contact';
 import Login from './pages/login';
 import Register from './pages/register';
 import View from './pages/view';
+import Edit from './pages/edit';
 import Create from './pages/create';
 import NotFound from './pages/notfound';
 import styles from './Navigation.module.css';
@@ -26,6 +27,7 @@ function Navigation() {
                             <Route path="/" exact component={Home} />
                             <Route path="/about" component={About} />
                             <Route path="/view/:id" component={View} />
+                            <Route path="/edit/:id" component={Edit} />
                             <Route path="/create">{loggedIn ? (<Create />) : (<Redirect to="/login" />)}</Route>
                             <Route path="/contact">{loggedIn ? (<Contact />) : (<Redirect to="/login" />)}</Route>
                             <Route path="/login">{loggedIn ? (<Redirect to="/" />) : (<Login />)}</Route>

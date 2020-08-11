@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
 import Context from '../../Context'
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 class View extends Component {
     constructor(props) {
@@ -76,18 +76,23 @@ class View extends Component {
             description,
             imageUrl,
             createdAt,
-            creator
+            creator,
+            id
         } = this.state
+
+        const editUrl = `/edit/${id}`
 
         return (
             <div>
                 <h1 className={styles.title}>{title}</h1>
                 <h5 className={styles.subtitle}>{createdAt}</h5>
                 {this.context.id !== creator ? null : (
-                    <div>
-                        <button>Edit</button>
-                        <form onSubmit={this.handleDelete}>
-                            <button type="submit" value="Submit">Delete</button>
+                    <div className={styles.sector}>
+                        <div className={styles.editForm}>
+                            <Link className={styles.editBtn} to={editUrl}>Edit</Link>
+                        </div>
+                        <form onSubmit={this.handleDelete} className={styles.deleteForm}>
+                            <button type="submit" value="Submit" className={styles.deleteBtn}>Delete</button>
                         </form>
                     </div>
                 )}

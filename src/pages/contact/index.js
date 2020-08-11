@@ -70,7 +70,7 @@ const Contact = () => {
             <div>
                 <textarea type="text" id="comment" onChange={(e) => changeText(e.target.value)} value={text} />
             </div>
-            <button onClick={submitText}>asd</button>
+            <button onClick={submitText}>Ask</button>
             <div>m
                 {comments.map((comment) => {
                 return (

@@ -8,6 +8,62 @@
     color: #009b90;
 }
 
+.sector {
+    margin-top: 10px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.editForm {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%
+}
+
+.editBtn {
+    width: 50px;
+    font-size: 15px;
+    float: right;
+    margin-right: 15px;
+    padding: 5px;
+    border: #f05b26 solid 1px;
+    outline: none;
+    background: #f05b26;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+}
+
+.editBtn:hover {
+    color: #f05b26;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.deleteForm {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%
+}
+
+.deleteBtn {
+    font-size: 15px;
+    margin-left: 15px;
+    padding: 5px;
+    outline: none;
+    border: #f05b26 solid 1px;
+    background: #f05b26;
+    color: #FFFFFF;
+}
+
+.deleteBtn:hover {
+    color: #f05b26;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
 .paragraph {
     padding-left: 20vw;
     padding-right: 20vw;
