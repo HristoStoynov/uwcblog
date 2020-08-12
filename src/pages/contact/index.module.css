@@ -1,7 +1,67 @@
-.openAnswer {
-    background-color: green;
+.searchDiv {
+    text-align: center;
 }
 
-.displayNone {
-    display: none;
+.searchArea {
+    height: 100px;
+    width: 300px;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgba(225, 228, 232, .2);
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.searchLabel {
+    text-align: center;
+    color: #009b90;
+}
+
+.searchBtn {
+    font-size: 15px;
+    margin-left: 15px;
+    padding: 5px;
+    outline: none;
+    border: #f05b26 solid 1px;
+    background: #f05b26;
+    color: #FFFFFF;
+}
+
+.searchBtn:hover {
+    color: #f05b26;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.span {
+    color: #0063a6;
+    font-weight: bold;
+}
+
+.questionDiv {
+    padding-left: calc(50vw - 150px);
+    padding-right: calc(50vw - 150px);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.answerDiv {
+    padding-left: calc(50vw - 100px);
+    padding-right: calc(50vw - 150px);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.answerSearch {
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgba(225, 228, 232, .2);
 }

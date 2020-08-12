@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Context from '../../Context'
-//import styles from './index.module.css'
+import styles from './index.module.css'
 import getCookie from '../../utils/cookie'
 
 const Contact = () => {
@@ -90,24 +90,32 @@ const Contact = () => {
 
     return (
         <div>
-            <label htmlFor="comment">Leave a message:</label>
-            <div>
-                <textarea type="text" id="comment" onChange={(e) => changeText(e.target.value)} value={text} />
+            <div className={styles.searchDiv}>
+                <label htmlFor="comment" className={styles.searchLabel}><h1>Leave a message:</h1></label>
+                <div>
+                    <textarea className={styles.searchArea} type="text" id="comment" onChange={(e) => changeText(e.target.value)} value={text} />
+                </div>
+                <button onClick={submitText} className={styles.searchBtn}>Ask</button>
             </div>
-            <button onClick={submitText}>Ask</button>
             <div>
                 {comments.map((comment) => {
                     return (
                         <div key={comment._id}>
-                            <div> {comment.text} </div>
+                            <div className={styles.questionDiv}>
+                                <span className={styles.span}>Q: </span>
+                                <span>{comment.text}</span>
+                            </div>
                             {comment.answer ? (
-                                <div>{comment.answer}</div>
-                            ) : (
-                                    <div>
-                                        <input type="text" value={answer[comment._id]} onChange={(e) => changeAnswer(comment._id, e.target.value)}></input>
-                                        <button onClick={() => submitAnswer(comment._id)}>Answer</button>
-                                    </div>
-                                )}
+                                <div className={styles.answerDiv}>
+                                    <span className={styles.span}>A: </span>
+                                    <span>{comment.answer}</span>
+                                </div>
+                            ) : MyContext.loggedIn ? (
+                                <div className={styles.answerDiv}>
+                                    <input type="text" value={answer[comment._id]} className={styles.answerSearch} onChange={(e) => changeAnswer(comment._id, e.target.value)}></input>
+                                    <button onClick={() => submitAnswer(comment._id)}>Answer</button>
+                                </div>
+                            ) : null}
 
                         </div>
                     )
