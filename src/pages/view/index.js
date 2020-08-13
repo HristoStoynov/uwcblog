@@ -62,7 +62,7 @@ class View extends Component {
                     this.props.history.push('/')
                 })
                 .catch(e => {
-                    return console.log(e)
+                    console.log(e)
                 })
         } catch (e) {
             console.log(e)

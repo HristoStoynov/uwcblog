@@ -7,6 +7,7 @@ const Contact = () => {
     const [text, setText] = useState('')
     const [answer, setAnswer] = useState({})
     const [comments, setComments] = useState([])
+    const [error, setError] = useState(false)
 
     const MyContext = useContext(Context)
 
@@ -23,6 +24,11 @@ const Contact = () => {
 
     const changeText = (value) => {
         setText(value)
+        if (!value.match(/^[A-Za-z0-9_ ]{5,}$/)) {
+            setError(true)
+        } else {
+            setError(false)
+        }
     }
 
     const submitText = () => {
@@ -94,7 +100,11 @@ const Contact = () => {
                 <label htmlFor="comment" className={styles.searchLabel}><h1>Leave a message:</h1></label>
                 <div>
                     <textarea className={styles.searchArea} type="text" id="comment" onChange={(e) => changeText(e.target.value)} value={text} />
+                    <div>
+                        {error ? <span className={styles.error}>Comment should be more than 5 letters long</span> : null}
+                    </div>
                 </div>
+
                 <button onClick={submitText} className={styles.searchBtn}>Ask</button>
             </div>
             <div>
@@ -113,7 +123,7 @@ const Contact = () => {
                             ) : MyContext.loggedIn ? (
                                 <div className={styles.answerDiv}>
                                     <input type="text" value={answer[comment._id]} className={styles.answerSearch} onChange={(e) => changeAnswer(comment._id, e.target.value)}></input>
-                                    <button onClick={() => submitAnswer(comment._id)}>Answer</button>
+                                    <button className={styles.searchBtn} onClick={() => submitAnswer(comment._id)}>Answer</button>
                                 </div>
                             ) : null}
 
