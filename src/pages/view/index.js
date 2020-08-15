@@ -49,24 +49,21 @@ class View extends Component {
             userId: this.context.id
         }
 
-        try {
-            fetch(`http://localhost:8000/api/post/delete?id=${id}`, {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': getCookie('x-auth-token')
-                }
+        fetch(`http://localhost:8000/api/post/delete?id=${id}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': getCookie('x-auth-token')
+            }
+        })
+            .then((val) => {
+                console.log(val)
+                this.props.history.push('/')
             })
-                .this((val) => {
-                    this.props.history.push('/')
-                })
-                .catch(e => {
-                    console.log(e)
-                })
-        } catch (e) {
-            console.log(e)
-        }
+            .catch(e => {
+                console.log(e)
+            })
     }
 
     render() {
