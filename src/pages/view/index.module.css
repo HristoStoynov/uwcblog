@@ -73,5 +73,15 @@
 
 .image {
     height: 30rem;
-    padding: 10px
+    padding: 10px;
+}
+
+@media (max-width: 900px) {
+    .paragraph {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+    .image {
+        height: 10rem;
+    }
 }
