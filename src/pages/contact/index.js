@@ -24,7 +24,7 @@ const Contact = () => {
 
     const changeText = (value) => {
         setText(value)
-        if (!value.match(/^[A-Za-z0-9_ ]{5,}$/)) {
+        if (!value.match(/^.{5,}$/)) {
             setError(true)
         } else {
             setError(false)

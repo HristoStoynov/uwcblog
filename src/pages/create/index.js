@@ -45,7 +45,7 @@ class Contact extends Component {
             description: event.target.value
         })
 
-        if (!event.target.value.match(/^[A-Za-z0-9_ ]{20,}$/)) {
+        if (!event.target.value.match(/^.{20,}$/)) {
             this.setState({
                 descriptionError: true
             })
